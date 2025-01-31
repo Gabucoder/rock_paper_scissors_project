@@ -31,7 +31,6 @@ function getHumanChoice(){
 function playRound(humanChoice, computerChoice){
     humanChoice = humanChoice.toUpperCase()
     computerChoice = computerChoice.toUpperCase()
-    console.log(computerChoice)
 
     if ((humanChoice == "SCISSORS" && computerChoice == "PAPER") 
              || (humanChoice == "PAPER" && computerChoice =="ROCK")
