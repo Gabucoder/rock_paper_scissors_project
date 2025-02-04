@@ -16,17 +16,6 @@ function getComputerchoice(){
 }
 
 
-//function to take user choice
-function getHumanChoice(){
-    let user_choice = prompt("Type your selection: rock, paper or scissors")
-   
-    return user_choice
-
-}
-
-
-
-
 //function for playing rounds
 function playRound(humanChoice, computerChoice){
     humanChoice = humanChoice.toUpperCase()
@@ -49,47 +38,90 @@ function playRound(humanChoice, computerChoice){
 
 }
 
-//function to play game
-function playGame(){
-    //intializing the scores
-    let humanScore = 0 
-    let computerScore = 0
 
-    for (let round = 1; round <=5; round++) {
+const rockBtn = document.querySelector(".rockBtn")
+const paperBtn = document.querySelector(".paperBtn")
+const scissorsBtn = document.querySelector(".scissorsBtn")
+const displayResults = document.querySelector(".displayResults")
+let roundCount = 0
+let maxRound = 5
 
-        const humanSelection = getHumanChoice()
-        const computerSelection = getComputerchoice()
-        const results = playRound(humanSelection, computerSelection)
+
+
+rockBtn.addEventListener("click", () =>  {
+
+    playerSelection = "rock"
+    playGame(playerSelection)
+})
+    
+paperBtn.addEventListener("click", () =>  {
+    playerSelection = "paper"
+    playGame(playerSelection)
         
-        if (results === "user wins!"){
+})
+        
+        
+scissorsBtn.addEventListener("click", () =>  {
+        
+    playerSelection = "scissors"
+    playGame(playerSelection)
+            
+})
+
+let humanScore = 0;
+let computerScore = 0
+
+function playGame(playerSelection) {
+   
+   
+    if(roundCount < maxRound) {
+        const computerSelection = getComputerchoice()
+        let results = playRound(playerSelection, computerSelection)
+        roundCount++
+
+        if (results === "user wins!") {
             humanScore++
-        } else if (results==="computer wins!"){
+        }else if (results === "computer wins!") {
             computerScore ++
         }
 
     }
-    if (humanScore > computerScore){
-        console.log("Congratulations you won!")
-    }else if(humanScore<computerScore){
-        console.log("computer won!")
-    } else{
-        console.log("its a draw!")
+    if(roundCount === maxRound) {
+       declareWinner()
+       disableBtns()
+
     }
+  
+}
+
+function declareWinner() {
+    if (humanScore > computerScore){
+        displayResults.textContent = "Congratulations you won!"
+    }else if(humanScore < computerScore){
+        displayResults.textContent = "Computer won!"
+    } else{
+        displayResults.textContent = "its a draw!"
+    }       
     
 }
-playGame()
+
+
+function disableBtns() {
+    rockBtn.disabled = true
+    paperBtn.disabled = true;
+    scissorsBtn.disabled = true;
+}
 
 
 
 
 
- // switch (user_choice){
-    //     case 1:
-    //         user_choice ="Rock";
-    //         break;
-    //     case 2:
-    //         user_choice = "Paper"
-    //         break;
-    //     default:
-    //         user_choice ="Scissors"
-    // }
+
+
+
+
+
+
+
+
+
